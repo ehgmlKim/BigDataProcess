@@ -32,22 +32,22 @@ for row in ws:
 		rank = ws.cell(row=row_id, column=8).value
 		if rank <= row_count*0.15:
 			print(row_id,"는 A+")
-			ws.cell(row=row_id, column=9).value = 'A+'
+			ws.cell(row=row_id, column=8).value = 'A+'
 		elif rank <= row_count*0.3:
 			print(row_id,"는 A")
-			ws.cell(row=row_id, column=9).value = 'A'
+			ws.cell(row=row_id, column=8).value = 'A'
 		elif rank <= row_count*0.5:
 			print(row_id,"는 B+")
-			ws.cell(row=row_id, column=9).value = 'B+'
+			ws.cell(row=row_id, column=8).value = 'B+'
 		elif rank <= row_count*0.7:
 			print(row_id,"는 B")
-			ws.cell(row=row_id, column=9).value = 'B'
+			ws.cell(row=row_id, column=8).value = 'B'
 		elif rank <= row_count*0.85:
 			print(row_id,"는 C+")
-			ws.cell(row=row_id, column=9).value = 'C+'
+			ws.cell(row=row_id, column=8).value = 'C+'
 		else :
 			print(row_id,"는 C")
-			ws.cell(row=row_id, column=9).value = 'C'
+			ws.cell(row=row_id, column=8).value = 'C'
 	row_id += 1
 			
 wb.save("student.xlsx")
