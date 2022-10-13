@@ -6,6 +6,9 @@ ws = wb['Sheet1']
 
 row_id = 1
 
+rank_list=[] # 등수 넣은 배열
+rank_rowid = {} # row_id : rank
+rank_dict={} #등수에 해당하는 학생 수 rank : num
 for row in ws:
 	rank=1
 	row_id2=1
@@ -17,37 +20,85 @@ for row in ws:
 				if a < b:
 					rank += 1
 				ws.cell(row=row_id, column=8).value = rank
+				rank_rowid[row_id] = rank
 			row_id2 += 1
 	row_id +=1
 
+total = row_id -2 #전체 학생 수
 
-row_count=row_id-2
-row_id = 1
-print(row_count)
-print(row_count*0.15)
+for i in range(1, row_id):
+	if i != 1:
+		rank_list.append(ws.cell(row=i, column=8).value)
 
 
-for row in ws:
-	if row_id != 1:
-		rank = ws.cell(row=row_id, column=8).value
-		if rank <= row_count*0.15:
-			print(row_id,"는 A+")
-			ws.cell(row=row_id, column=8).value = 'A+'
-		elif rank <= row_count*0.3:
-			print(row_id,"는 A")
-			ws.cell(row=row_id, column=8).value = 'A'
-		elif rank <= row_count*0.5:
-			print(row_id,"는 B+")
-			ws.cell(row=row_id, column=8).value = 'B+'
-		elif rank <= row_count*0.7:
-			print(row_id,"는 B")
-			ws.cell(row=row_id, column=8).value = 'B'
-		elif rank <= row_count*0.85:
-			print(row_id,"는 C+")
-			ws.cell(row=row_id, column=8).value = 'C+'
-		else :
-			print(row_id,"는 C")
-			ws.cell(row=row_id, column=8).value = 'C'
+for e in range(len(rank_list)):
+	if rank_list[e] not in rank_dict:
+		rank_dict[rank_list[e]] = 1
+	else :
+		rank_dict[rank_list[e]] += 1
 	row_id += 1
-			
+
+
+
+Rid = list(rank_rowid.items())
+Rid.sort(key = lambda x:x[1]) # row_id : rank
+
+Rnum= list(rank_dict.items()) #만든 딕셔너리를 리스트로 변환 등수 : 등수에 해당하는 학생
+Rnum.sort(key=lambda x:x[0])
+
+getA=[]
+getAp=[]
+getB=[]
+getBp=[]
+getC=[]
+getCp=[]
+
+
+#A,B,C 등급 먼저 알아내기
+for k in range(len(Rnum)):
+	count= Rnum[k][1]
+	rank = Rnum[k][0]
+	if len(getA) + count <= total * 0.3:
+		for i in range(len(Rid)):
+			if rank == Rid[i][1] :
+				getA.append(Rid[i][0])
+	elif len(getB) + len(getA) + count + 1 <= total * 0.7:
+		for i in range(len(Rid)):
+			if rank == Rid[i][1] :
+				getB.append(Rid[i][0])
+	else:
+		for i in range(len(Rid)):
+			if rank == Rid[i][1] :
+				getC.append(Rid[i][0])
+
+# + 붙일 애들 알아내기
+for k in range(len(Rnum)):
+	count= Rnum[k][1]
+	rank = Rnum[k][0]
+	if len(getAp) + count <= len(getA) * 0.5:
+		for i in getA:
+			getAp.append(i)
+	elif len(getBp) + count <= len(getB) * 0.5:
+		for i in getB:
+			getBp.append(i)
+	elif len(getCp) + count <= len(getC) * 0.5:
+		for i in getC:
+			getCp.append(i)
+	else:
+		pass	
+#점수 부여하기	
+for k in getA:	
+	ws.cell(row=k, column=8).value = 'A'
+for k in getB:
+	ws.cell(row=k, column=8).value = 'B'
+for k in getC:
+	ws.cell(row=k, column=8).value = 'C'
+for k in getAp:	
+	ws.cell(row=k, column=8).value = 'A+'
+for k in getBp:
+	ws.cell(row=k, column=8).value = 'B+'
+for k in getCp:
+	ws.cell(row=k, column=8).value = 'C+'
+	
+
 wb.save("student.xlsx")
