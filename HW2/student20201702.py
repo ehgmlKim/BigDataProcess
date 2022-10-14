@@ -4,11 +4,22 @@ import openpyxl
 wb = openpyxl.load_workbook("student.xlsx")
 ws = wb['Sheet1']
 
-row_id = 1
 
 rank_list=[] # 등수 넣은 배열
 rank_rowid = {} # row_id : rank
 rank_dict={} #등수에 해당하는 학생 수 rank : num
+
+row_id = 1;
+for row in ws:
+	if row_id != 1:
+		sum_v = ws.cell(row = row_id, column = 3).value * 0.3
+		sum_v += ws.cell(row = row_id, column = 4).value * 0.35
+		sum_v += ws.cell(row = row_id, column = 5).value * 0.34
+		sum_v += ws.cell(row = row_id, column = 6).value
+		ws.cell(row = row_id, column = 7).value = sum_v
+	row_id += 1
+
+row_id = 1
 for row in ws:
 	rank=1
 	row_id2=1
