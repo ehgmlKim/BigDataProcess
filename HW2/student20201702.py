@@ -4,7 +4,6 @@ import openpyxl
 wb = openpyxl.load_workbook("student.xlsx")
 ws = wb['Sheet1']
 
-
 rank_list=[] # 등수 넣은 배열
 rank_rowid = {} # row_id : rank
 rank_dict={} #등수에 해당하는 학생 수 rank : num
