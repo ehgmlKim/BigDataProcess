@@ -83,15 +83,10 @@ for k in range(len(Rnum)):
 
 # + 붙일 애들 알아내기
 for k in range(len(Rnum)):
-	print("루프 결과:",getAp, getA, getBp, getB, getCp, getC)
-	count= Rnum[k][1]
-	rank = Rnum[k][0]
-	print("count : ",count,"rank : ",rank)
 	rowid=[]
 	for f in range(len(Rid)):
 		if rank == Rid[f][1]:
 			rowid.append(Rid[f][0])
-	print("rowid:",rowid)
 	for r in rowid:
 		if r in getA:
 			if len(getAp) + count <= len(getA) * 0.5:
