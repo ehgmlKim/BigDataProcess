@@ -85,17 +85,25 @@ for k in range(len(Rnum)):
 for k in range(len(Rnum)):
 	count= Rnum[k][1]
 	rank = Rnum[k][0]
-	if len(getAp) + count <= len(getA) * 0.5:
-		for i in getA:
-			getAp.append(i)
-	elif len(getBp) + count <= len(getB) * 0.5:
-		for i in getB:
-			getBp.append(i)
-	elif len(getCp) + count <= len(getC) * 0.5:
-		for i in getC:
-			getCp.append(i)
+	print(Rid[k][1] == rank)
+	print(getAp, getA, getBp, getB, getCp, getC)
+	for f in range(len(Rid)):
+		if rank == Rid[f][1]:
+			rowid = Rid[f][0]
+	if rowid in getA:
+		if len(getAp) + count <= len(getA) * 0.5:
+			for i in getA:
+				getAp.append(i)
+	if rowid in getB:
+		if len(getBp) + count <= len(getB) * 0.5:
+			for i in getB:
+				getBp.append(i)
+	if rowid in getC:
+		if len(getCp) + count <= len(getC) * 0.5:
+			for i in getC:
+				getCp.append(i)
 	else:
-		pass	
+		pass		
 #점수 부여하기	
 for k in getA:	
 	ws.cell(row=k, column=8).value = 'A'
