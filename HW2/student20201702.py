@@ -88,7 +88,7 @@ for k in range(len(Rnum)):
 for k in range(len(Rnum)):
 	count= Rnum[k][1]
 	rank = Rnum[k][0]
-		rowid=[]
+	rowid=[]
 	for f in range(len(Rid)):
 		if rank == Rid[f][1]:
 			rowid.append(Rid[f][0])
@@ -122,14 +122,6 @@ for k in getCp:
 	
 	
 
-
-
-print("A : ", getAp)
-print("a : ", getA)
-print("B : ", getBp)
-print("b : ", getB)
-print("C : ", getCp)
-print("c : ", getC)
 
 
 
