@@ -73,7 +73,7 @@ for k in range(len(Rnum)):
 		for i in range(len(Rid)):
 			if rank == Rid[i][1] :
 				getA.append(Rid[i][0])
-	elif len(getB) + len(getA) + count + 1 <= total * 0.7:
+	elif len(getB) + len(getA) + count <= total * 0.7:
 		for i in range(len(Rid)):
 			if rank == Rid[i][1] :
 				getB.append(Rid[i][0])
