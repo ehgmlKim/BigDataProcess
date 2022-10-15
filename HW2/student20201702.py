@@ -86,7 +86,7 @@ for k in range(len(Rnum)):
 # + 붙일 애들 알아내기
 
 for k in range(len(Rnum)):
-		count= Rnum[k][1]
+	count= Rnum[k][1]
 	rank = Rnum[k][0]
 		rowid=[]
 	for f in range(len(Rid)):
