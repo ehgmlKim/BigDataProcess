@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 import openpyxl
-
+#딕셔너리로 만들고 어찌어찌 해본 버전
 wb = openpyxl.load_workbook("student.xlsx")
 ws = wb['Sheet1']
+
+
 
 rank_list=[] # 등수 넣은 배열
 rank_rowid = {} # row_id : rank
@@ -35,7 +37,6 @@ for row in ws:
 	row_id +=1
 
 total = row_id -2 #전체 학생 수
-
 for i in range(1, row_id):
 	if i != 1:
 		rank_list.append(ws.cell(row=i, column=8).value)
@@ -50,12 +51,13 @@ for e in range(len(rank_list)):
 
 
 
+
 Rid = list(rank_rowid.items())
 Rid.sort(key = lambda x:x[1]) # row_id : rank
-
+#print("Rid :", Rid)
 Rnum= list(rank_dict.items()) #만든 딕셔너리를 리스트로 변환 등수 : 등수에 해당하는 학생
 Rnum.sort(key=lambda x:x[0])
-
+#print("Rnum : ", Rnum)
 getA=[]
 getAp=[]
 getB=[]
@@ -81,9 +83,13 @@ for k in range(len(Rnum)):
 			if rank == Rid[i][1] :
 				getC.append(Rid[i][0])
 
+
 # + 붙일 애들 알아내기
+
 for k in range(len(Rnum)):
-	rowid=[]
+		count= Rnum[k][1]
+	rank = Rnum[k][0]
+		rowid=[]
 	for f in range(len(Rid)):
 		if rank == Rid[f][1]:
 			rowid.append(Rid[f][0])
@@ -115,5 +121,32 @@ for k in getBp:
 for k in getCp:
 	ws.cell(row=k, column=8).value = 'C+'
 	
+	
+
+
+
+print("A : ", getAp)
+print("a : ", getA)
+print("B : ", getBp)
+print("b : ", getB)
+print("C : ", getCp)
+print("c : ", getC)
+
+
 
 wb.save("student.xlsx")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
