@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 import openpyxl
-#딕셔너리로 만들고 어찌어찌 해본 버전
 wb = openpyxl.load_workbook("student.xlsx")
 ws = wb['Sheet1']
 
