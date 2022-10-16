@@ -86,7 +86,6 @@ for k in range(len(Rnum)):
 
 
 # + 붙일 애들 알아내기
-
 for k in range(len(Rnum)):
 	count= Rnum[k][1]
 	rank = Rnum[k][0]
@@ -94,6 +93,7 @@ for k in range(len(Rnum)):
 	for f in range(len(Rid)):
 		if rank == Rid[f][1]:
 			rowid.append(Rid[f][0])
+	print("rowid:",rowid)
 	if len(getAp) + count <= len(getA) * 0.5:
 		for r in rowid:
 			if r in getA:
@@ -107,7 +107,7 @@ for k in range(len(Rnum)):
 			if r in getC:
 				getCp.append(r)
 	else:
-		pass
+		pass	
 #점수 부여하기	
 for k in getA:	
 	ws.cell(row=k, column=8).value = 'A0'
