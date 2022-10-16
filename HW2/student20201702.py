@@ -94,27 +94,27 @@ for k in range(len(Rnum)):
 	for f in range(len(Rid)):
 		if rank == Rid[f][1]:
 			rowid.append(Rid[f][0])
-	for r in rowid:
-		if r in getA:
-			if len(getAp) + count <= len(getA) * 0.5:
+	if len(getAp) + count <= len(getA) * 0.5:
+		for r in rowid:
+			if r in getA:
 				getAp.append(r)
-	for r in rowid:
-		if r in getB:
-			if len(getBp) + count <= len(getB) * 0.5:
+	if len(getBp) + count <= len(getB) * 0.5:
+		for r in rowid:
+			if r in getB:
 				getBp.append(r)
-	for r in rowid:
-		if r in getC:
-			if len(getCp) + count <= len(getC) * 0.5:
+	if len(getCp) + count <= len(getC) * 0.5:
+		for r in rowid:
+			if r in getC:
 				getCp.append(r)
 	else:
-		pass	
+		pass
 #점수 부여하기	
 for k in getA:	
-	ws.cell(row=k, column=8).value = 'A'
+	ws.cell(row=k, column=8).value = 'A0'
 for k in getB:
-	ws.cell(row=k, column=8).value = 'B'
+	ws.cell(row=k, column=8).value = 'B0'
 for k in getC:
-	ws.cell(row=k, column=8).value = 'C'
+	ws.cell(row=k, column=8).value = 'C0'
 for k in getAp:	
 	ws.cell(row=k, column=8).value = 'A+'
 for k in getBp:
