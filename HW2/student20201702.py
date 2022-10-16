@@ -93,7 +93,6 @@ for k in range(len(Rnum)):
 	for f in range(len(Rid)):
 		if rank == Rid[f][1]:
 			rowid.append(Rid[f][0])
-	print("rowid:",rowid)
 	if len(getAp) + count <= len(getA) * 0.5:
 		for r in rowid:
 			if r in getA:
