@@ -69,18 +69,20 @@ getCp=[]
 for k in range(len(Rnum)):
 	count= Rnum[k][1]
 	rank = Rnum[k][0]
-	if len(getA) + count <= total * 0.3:
+	if rank <= total*0.3 and len(getA) + count <= total * 0.3:
 		for i in range(len(Rid)):
 			if rank == Rid[i][1] :
 				getA.append(Rid[i][0])
-	elif len(getB) + len(getA) + count <= total * 0.7:
+	elif rank <= total * 0.7 and len(getB) + len(getA) + count  <= total * 0.7:
 		for i in range(len(Rid)):
 			if rank == Rid[i][1] :
 				getB.append(Rid[i][0])
-	else:
+	elif rank > total*0.7:
 		for i in range(len(Rid)):
 			if rank == Rid[i][1] :
 				getC.append(Rid[i][0])
+	else:
+		pass
 
 
 # + 붙일 애들 알아내기
