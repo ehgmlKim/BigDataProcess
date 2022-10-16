@@ -110,11 +110,11 @@ for k in range(len(Rnum)):
 		pass	
 #점수 부여하기	
 for k in getA:	
-	ws.cell(row=k, column=8).value = 'A'
+	ws.cell(row=k, column=8).value = 'A0'
 for k in getB:
-	ws.cell(row=k, column=8).value = 'B'
+	ws.cell(row=k, column=8).value = 'B0'
 for k in getC:
-	ws.cell(row=k, column=8).value = 'C'
+	ws.cell(row=k, column=8).value = 'C0'
 for k in getAp:	
 	ws.cell(row=k, column=8).value = 'A+'
 for k in getBp:
