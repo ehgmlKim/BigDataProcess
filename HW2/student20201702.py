@@ -102,7 +102,7 @@ for k in range(len(Rnum)):
 				getBp.append(r)
 	for r in rowid:
 		if r in getC:
-			if len(getCp) + count <= len(getB) * 0.5:
+			if len(getCp) + count <= len(getC) * 0.5:
 				getCp.append(r)
 	else:
 		pass	
