@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 gen = dict()
-file = input()
+file, out = input().split()
 with open(file, "rt") as f:
 	for line in f:
 		str_arr = line.split('::')
@@ -10,7 +10,8 @@ with open(file, "rt") as f:
 				gen[e] = 1
 			else:
 				gen[e] += 1
-out = input()
+				
+				
 with open(out, "wt") as fp:
 	for key, value in gen.items():
 		s = key+" "+str(value)+"\n"
