@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from datetime import datetime, date
 def what_day(date):
-	days = ['MON', 'TUE', 'WEN', 'THU', 'FRI', 'SAT', 'SUN']
+	days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
 	day = date.weekday()
 	return (days[day])
 
