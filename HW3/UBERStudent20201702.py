@@ -19,7 +19,8 @@ with open(file, "rt") as f:
 			result[region_day][0] += int(str_arr[2])
 			result[region_day][1] += int(str_arr[3])
 
+
 with open(out, "wt") as fp:
-	for key, value in result.items():
+	for key, value in sorted(result.items()):
 		s = key+" "+str(value[0])+","+str(value[1])+"\n"
 		fp.write(s)
