@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import sys
 from datetime import datetime, date
 def what_day(date):
 	days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
@@ -6,7 +7,8 @@ def what_day(date):
 	return (days[day])
 
 result=dict()
-file, out = input().split()
+file = sys.argv[1]
+out = sys.argv[2]
 with open(file, "rt") as f:
 	while True:
 	line = f.readline()
@@ -23,6 +25,6 @@ with open(file, "rt") as f:
 
 
 with open(out, "wt") as fp:
-	for key, value in sorted(result.items()):
+	for key, value in result.items():
 		s = key+" "+str(value[0])+","+str(value[1])+"\n"
 		fp.write(s)
