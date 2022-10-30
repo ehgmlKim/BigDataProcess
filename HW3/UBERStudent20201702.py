@@ -10,9 +10,7 @@ result=dict()
 file = sys.argv[1]
 out = sys.argv[2]
 with open(file, "rt") as f:
-	while True:
-	line = f.readline()
-	if not line: break
+	for line in f:
 		str_arr = list(map(lambda x:x.strip(), line.split(',')))
 		date_arr = list(map(lambda x:int(x), str_arr[1].split('/')))
 		region_day = str_arr[0]+","+what_day(date(date_arr[2], date_arr[0], date_arr[1]))
