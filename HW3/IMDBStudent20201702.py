@@ -4,7 +4,7 @@ file, out = input().split()
 with open(file, "rt") as f:
 	while True:
 		line = f.readline()
-		if not row: break
+		if not line: break
 		str_arr = line.split('::')
 		gen_arr = list(map(lambda x:x.strip(), str_arr[2].split('|')))
 		for e in gen_arr:
