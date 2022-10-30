@@ -2,7 +2,9 @@
 gen = dict()
 file, out = input().split()
 with open(file, "rt") as f:
-	for line in f:
+	while True:
+		line = f.readline()
+		if not row: break
 		str_arr = line.split('::')
 		gen_arr = list(map(lambda x:x.strip(), str_arr[2].split('|')))
 		for e in gen_arr:
