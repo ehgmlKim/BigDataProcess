@@ -1,10 +1,10 @@
 #!/usr/bin/python3
+import sys
 gen = dict()
-file, out = input().split()
+file = sys.argv[1]
+out = sys.argv[2]
 with open(file, "rt") as f:
-	while True:
-		line = f.readline()
-		if not line: break
+	for line in f:
 		str_arr = line.split('::')
 		gen_arr = list(map(lambda x:x.strip(), str_arr[2].split('|')))
 		for e in gen_arr:
