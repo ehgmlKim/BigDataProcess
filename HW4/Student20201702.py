@@ -1,71 +1,67 @@
-from numpy import *
-from os import listdir
-import operator
 import sys
+from os import listdir
+import numpy as np
+import operator
 
-def classify0(inX, dataSet, labels, k):
-    dataSetSize = dataSet.shape[0]
-    diffMat = tile(inX, (dataSetSize, 1)) - dataSet
-    sqDiffMat = diffMat ** 2
-    sqDistances = sqDiffMat.sum(axis = 1)
-    distances = sqDistances ** 0.5
-    sortedDistIndicies = distances.argsort()
-    classCount={}
-    for i in range(k):
-        voteIlabel = labels[sortedDistIndicies[i]]
-        classCount[voteIlabel] = classCount.get(voteIlabel, 0) + 1
-    sortedClassCount = sorted(classCount.items(),
-                              key=operator.itemgetter(1), reverse=True)
-    return sortedClassCount[0][0]
-  
-def img2vector(filename):
-    returnVect = zeros((1, 1024))
-    fr = open(filename)
-    for i in range(32):
-        lineStr = fr.readline()
-        for j in range(32):
-            returnVect[0, 32*i+j] = int(lineStr[j])
-    return returnVect
-
-def trainMat(trainfile):
-    hwLabels = []
-    trainingFileList = listdir(trainfile)
+def createDataSet(dirname):
+    labels = []
+    trainingFileList = listdir(dirname)
     m = len(trainingFileList)
-    trainingMat = zeros((m, 1024))
-    for i in range(m):
+    matrix = np.zeros((m, 1024)) 
+
+    for i in range(m): 
         fileNameStr = trainingFileList[i]
-        fileStr = fileNameStr.split('.')[0]
-        classNumStr = int(fileStr.split('_')[0])
-        hwLabels.append(classNumStr)
-        trainingMat[i, :] = img2vector('%s/%s' % (trainfile, fileNameStr))
-    return hwLabels, trainingMat
-   
-def hwClassifier(trainingMat, hwLabels, test, testtxt, k):
-    testData = img2vector('%s/%s' % (test, testtxt))
-    classifierResult = classify0(testData, trainingMat, hwLabels, k)
-    #print("Result: %d" % classifierResult)
-    return classifierResult
-   
-trainfile = sys.argv[1]
-testfile = sys.argv[2]
+        answer = int(fileNameStr.split('_')[0]) # 정답 저장 
+        labels.append(answer)
+        matrix[i, :] = getVector(dirname + '/' + fileNameStr)
+    return matrix, labels 
 
-test = listdir(testfile)
-m = len(test)
-reList = []
-error = 0
-errorList = []
-hwLabels, trainingMat = trainMat(trainfile)
-for k in range(1,21):
-	for testtxt in test:
-		result = (hwClassifier(trainingMat, hwLabels, testfile, testtxt, k))
-		testtxt_name = testtxt.split('.')[0]
-		testtxt_num = int(testtxt_name.split('_')[0])
-		if result != testtxt_num:
-			error += 1
-	errorList.append(int(error/m*100))
-	
+def classify0(inX, dataSet, labels, k): 
+    dataSetSize = dataSet.shape[0]
+    diffMat = np.tile(inX, (dataSetSize, 1)) - dataSet
+    sqDiffMat = diffMat ** 2 
+    sqDistances = sqDiffMat.sum(axis = 1) 
+    distances = sqDistances ** 0.5 
+    sortedDistIndicies = distances.argsort() 
+    classCount = {} 
 
-for i in errorList:
-	print(i)
+    for i in range(k): 
+        voteIlabel = labels[sortedDistIndicies[i]] 
+        classCount[voteIlabel] = classCount.get(voteIlabel, 0) + 1 
+    sortedClassCount = sorted(classCount.items(), key= operator.itemgetter(1), reverse=True)
+    return sortedClassCount[0][0]
+
+def getVector(filename): # txt file을 1행 1024열 vector(list)로 변환 
+    vector = np.zeros((1, 1024)) # 1024 = 32 x 32
+    with open(filename) as f:
+        for i in range(32):
+            line = f.readline()
+            for j in range(32):
+                vector[0, 32 * i + j] = int(line[j])
+        return vector        
+
+# main
+trainingFileDirName = sys.argv[1]
+testFileDirName = sys.argv[2]
+
+testFileList = listdir(testFileDirName)
+length = len(testFileList)
+
+matrix, labels = createDataSet(trainingFileDirName)
+
+for k in range(1, 21): 
+    count = 0 # 전체 데이터 개수
+    errorCount = 0 # 에러가 발생한 데이터 개수
+    
+    for i in range(length): 
+        answer = int(testFileList[i].split('_')[0])
+        testData = getVector(testFileDirName + '/' + testFileList[i])
+        classifiedResult = classify0(testData, matrix, labels, k)
+        
+        count += 1
+        if answer != classifiedResult :
+            errorCount += 1
+    
+    print(int(errorCount / count * 100))
 
 
